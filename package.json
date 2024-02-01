@@ -14,11 +14,13 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@npmcli/map-workspaces": "3.0.4",
     "citty": "0.1.5",
     "ts-results": "3.3.0"
   },
   "devDependencies": {
     "@types/node": "20.11.15",
+    "@types/npmcli__map-workspaces": "3.0.4",
     "@typescript-eslint/eslint-plugin": "6.20.0",
     "@typescript-eslint/parser": "6.20.0",
     "eslint": "8.56.0",
