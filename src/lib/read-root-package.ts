@@ -14,7 +14,7 @@ type ReadRootPackageError =
       kind: "unknownError";
     };
 
-type ReadRootPackage = (
+export type ReadRootPackage = (
   fileName?: string,
 ) => Promise<Result<ReadRootPackageSuccess, ReadRootPackageError>>;
 

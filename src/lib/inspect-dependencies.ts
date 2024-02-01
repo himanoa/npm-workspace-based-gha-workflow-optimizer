@@ -1,6 +1,7 @@
 import { Err, Result } from "ts-results";
 import { Package } from "./package";
 import { Tree } from "./tree";
+import { RootPackage } from "./root-package";
 
 export type InspectDependenciesSuccess = Tree<Package>;
 
@@ -11,9 +12,9 @@ export type InspectDependenciesError = {
 
 export type InspectDependencies = (
   searchRootPackageName: string,
-  rootPackage: Package,
-) => Result<InspectDependenciesSuccess, InspectDependenciesError>;
+  rootPackage: RootPackage,
+) => Promise<Result<InspectDependenciesSuccess, InspectDependenciesError>>;
 
-export const inspectDependencies: InspectDependencies = () => {
+export const inspectDependencies: InspectDependencies = async () => {
   return Err({ kind: "unknownError", error: new Error("unimplemented") });
 };
