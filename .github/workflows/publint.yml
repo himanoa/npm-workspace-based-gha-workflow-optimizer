@@ -2,7 +2,7 @@ name: publint
 on: [push, pull_request]
 
 jobs:
-  build:
+  publint:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
