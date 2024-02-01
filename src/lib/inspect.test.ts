@@ -8,10 +8,11 @@ describe("inspect", () => {
       const inspectDependencies = vi.fn();
       const inspect = makeInspect({
         inspectDependencies,
-        readRootPackage: async () => Ok({
-          name: 'root',
-          workspaces: []
-        })
+        readRootPackage: async () =>
+          Ok({
+            name: "root",
+            workspaces: [],
+          }),
       });
       await inspect({ packageName: "foo" });
       expect(inspectDependencies).toBeCalled();
@@ -19,15 +20,17 @@ describe("inspect", () => {
 
     it("called readRootPackage function", async () => {
       const inspectDependencies = vi.fn();
-      const readRootPackage = vi.fn(async () => Ok({
-        name: 'root',
-        workspaces: []
-      }));
+      const readRootPackage = vi.fn(async () =>
+        Ok({
+          name: "root",
+          workspaces: [],
+        }),
+      );
 
       const inspect = makeInspect({
         inspectDependencies,
-        readRootPackage
-      })
+        readRootPackage,
+      });
       await inspect({ packageName: "foo" });
       expect(readRootPackage).toBeCalled();
     });
