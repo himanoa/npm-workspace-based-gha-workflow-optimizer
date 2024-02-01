@@ -9,7 +9,10 @@ export type InspectDependenciesError = {
   error: Error
 }
 
-export type InspectDependencies = (rootPackageName: string) => Result<InspectDependenciesSuccess, InspectDependenciesError>
+export type InspectDependencies = (
+  searchRootPackageName: string,
+  rootPackage: Package
+) => Result<InspectDependenciesSuccess, InspectDependenciesError>
 
 export const inspectDependencies: InspectDependencies = () => {
   return Err({kind: 'unknownError', error: new Error("unimplemented")})
