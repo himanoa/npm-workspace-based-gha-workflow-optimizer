@@ -3,15 +3,15 @@ on: [push, pull_request]
 
 jobs:
   build:
-    runs_on: ubuntu-latest
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
-        with:
-          node-version: '18.x'
-          registry-url: 'https://registry.npmjs.org'
-      - uses: pnpm/action-setup@v2
-        with:
-          version: 8
-      - run: pnpm install
-      - run: pnpm test
+    - uses: actions/checkout@v2
+    - uses: actions/setup-node@v1
+      with:
+        node-version: '18.x'
+        registry-url: 'https://registry.npmjs.org'
+    - uses: pnpm/action-setup@v2
+      with:
+        version: 8
+    - run: pnpm install
+    - run: pnpm test
