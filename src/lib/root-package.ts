@@ -1,6 +1,6 @@
-import { Workspace } from "./workspace"
+import { Workspace } from "./workspace";
 
 export type RootPackage = {
-  name: string
-  workspaces: ReadonlyArray<Workspace>
-}
+  name: string;
+  workspaces: ReadonlyArray<Workspace>;
+};

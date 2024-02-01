@@ -1,4 +1,4 @@
 export type Package = {
-  name: string,
-  dependencies: ReadonlyArray<string>
-}
+  name: string;
+  dependencies: ReadonlyArray<string>;
+};
