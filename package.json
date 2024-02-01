@@ -7,7 +7,8 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "build": "tsup src/cli.ts",
-    "lint": "eslint -c .eslintrc.js . --ext ts"
+    "lint": "eslint -c .eslintrc.js . --ext ts",
+    "start": "node dist/cli.js"
   },
   "keywords": [],
   "author": "",
