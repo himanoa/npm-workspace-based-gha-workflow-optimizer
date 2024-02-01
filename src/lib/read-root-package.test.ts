@@ -1,23 +1,24 @@
 import { readRootPackage } from "./read-root-package";
 import { describe, it, expect } from "vitest";
 import { makeDummyMonorepo } from "./testing/make-dummy-monorepo";
+import mock from 'mock-fs'
+
+mock(makeDummyMonorepo())
 
 describe("readRootPackage", () => {
   describe("if found filename", () => {
     it("return to RootPackage", async () => {
-      const teardown = makeDummyMonorepo()
-      const result = await readRootPackage('./tmp/package.json')
-      teardown()
+      const result = await readRootPackage()
       expect(result.val).toStrictEqual({
         name: 'root',
         workspaces: [
           {
             name: '@dummy/a',
-            path: './workspaces/a'
+            relativePath: 'workspaces/a'
           },
           {
             name: '@dummy/b',
-            path: './workspaces/b'
+            relativePath: 'workspaces/b'
           }
         ]
       })

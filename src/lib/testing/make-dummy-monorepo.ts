@@ -1,42 +1,36 @@
-import { mkdirSync, rmSync, writeFileSync } from "fs"
-
-type TearDown = () => void
-type MakeDummyMonorepo = () => TearDown
-
-export const makeDummyMonorepo: MakeDummyMonorepo =  () => {
-  const packages = [
-    {
-      name: '@dummy/a',
-      path: './workspaces/a'
-    },
-    {
-      name: '@dummy/b',
-      path: './workspaces/b'
-    }
-  ]
-
-  const rootPackageJson = {
-    "name": "root",
-    "version": "1.0.0",
-    "description": "",
-    "main": "index.js",
-    "workspaces": packages.map(p => p.path),
-    "scripts": {
-    },
-    "keywords": [],
-    "author": "",
-    "license": "ISC",
-    "dependencies": {
-    },
-    "devDependencies": {
-    }
+const packages = [
+  {
+    name: '@dummy/a',
+    path: './workspaces/a'
+  },
+  {
+    name: '@dummy/b',
+    path: './workspaces/b'
   }
+]
 
-  writeFileSync('./tmp/package.json', JSON.stringify(rootPackageJson))
+const rootPackageJson = {
+  "name": "root",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "workspaces": packages.map(p => p.path),
+  "scripts": {
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+  },
+  "devDependencies": {
+  }
+}
 
-  for(const p of packages) {
-    const packageJson = {
-      "name": p.name,
+const nameAndBodyMaps = packages.map(({name, path}) => {
+  return {
+    path: path.replace('./workspaces/', ''),
+    pkg: {
+      "name": name,
       "version": "1.0.0",
       "description": "",
       "main": "index.js",
@@ -50,12 +44,21 @@ export const makeDummyMonorepo: MakeDummyMonorepo =  () => {
       "devDependencies": {
       }
     }
-    mkdirSync(`./tmp/${p.path}`, { recursive: true })
-    writeFileSync(`./tmp/${p.path}/package.json`, JSON.stringify(packageJson))
   }
+})
 
-  return () => {
-    rmSync('./tmp/package.json')
-    rmSync('./tmp/workspaces', { force: true, recursive: true })
+export const makeDummyMonorepo = () => {
+  return {
+    './package.json': JSON.stringify(rootPackageJson),
+    workspaces: {
+      ...nameAndBodyMaps.reduce((acc, {path, pkg}) => {
+        return {
+          ...acc,
+          [path]: {
+            'package.json': JSON.stringify(pkg)
+          }
+        }
+      }, {})
+    }
   }
 }
