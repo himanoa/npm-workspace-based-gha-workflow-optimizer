@@ -3,7 +3,7 @@ import { makeGraph } from "./digraph";
 
 describe("makeGraph", () => {
   it("test", () => {
-    expect(makeGraph([{ from: 'foo', to: 'bar' }])).toMatchInlineSnapshot(`
+    expect(makeGraph([{ from: "foo", to: "bar" }])).toMatchInlineSnapshot(`
       {
         "graph": [
           [
@@ -24,9 +24,14 @@ describe("makeGraph", () => {
           ],
         },
       }
-    `)
+    `);
 
-    expect(makeGraph([{ from: 'foo', to: 'bar' }, { from: 'bar', to: 'foo' }])).toMatchInlineSnapshot(`
+    expect(
+      makeGraph([
+        { from: "foo", to: "bar" },
+        { from: "bar", to: "foo" },
+      ]),
+    ).toMatchInlineSnapshot(`
       {
         "graph": [
           [],
@@ -52,9 +57,15 @@ describe("makeGraph", () => {
           ],
         },
       }
-    `)
+    `);
 
-    expect(makeGraph([{ from: 'foo', to: 'bar' }, { from: 'bar', to: 'baz' }, { from: 'baz', to: 'foo' }])).toMatchInlineSnapshot(`
+    expect(
+      makeGraph([
+        { from: "foo", to: "bar" },
+        { from: "bar", to: "baz" },
+        { from: "baz", to: "foo" },
+      ]),
+    ).toMatchInlineSnapshot(`
       {
         "graph": [
           [],
@@ -88,7 +99,6 @@ describe("makeGraph", () => {
           ],
         },
       }
-    `)
-  })
-})
-
+    `);
+  });
+});

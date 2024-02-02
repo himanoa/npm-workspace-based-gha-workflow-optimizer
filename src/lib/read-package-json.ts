@@ -21,18 +21,17 @@ export type ReadPackageJson = (
 ) => Promise<Result<ReadPackageJsonSuccess, ReadPackageJsonError>>;
 
 export const readPackageJson: ReadPackageJson = async (root, path) => {
-  const packageJsonRawResult = await (
-    readFile(path, 'utf8')
-    .then(body => Ok(body))
-    .catch(() => Err({kind: 'notFoundPackageError'} as const))
-  )
+  const packageJsonRawResult = await readFile(path, "utf8")
+    .then((body) => Ok(body))
+    .catch(() => Err({ kind: "notFoundPackageError" } as const));
 
-  return packageJsonRawResult.map(packageJsonRaw => {
-    const pkg = JSON.parse(packageJsonRaw)
+  return packageJsonRawResult.map((packageJsonRaw) => {
+    const pkg = JSON.parse(packageJsonRaw);
 
-    const workspacePackageNames = root.workspaces.map(p => p.name)
-    const dependencies = mergeDeps(pkg).filter(d => workspacePackageNames.includes(d))
-    return {name: pkg.name, dependencies}
-  })
+    const workspacePackageNames = root.workspaces.map((p) => p.name);
+    const dependencies = mergeDeps(pkg).filter((d) =>
+      workspacePackageNames.includes(d),
+    );
+    return { name: pkg.name, dependencies };
+  });
 };
-

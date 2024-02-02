@@ -1,4 +1,4 @@
-import { IPackageJson as PackageJson } from 'package-json-type'
+import { IPackageJson as PackageJson } from "package-json-type";
 
 /**
  * Merge all dependencies present in the package.json specification
@@ -8,13 +8,12 @@ import { IPackageJson as PackageJson } from 'package-json-type'
  *
  **/
 export const mergeDeps = (p: PackageJson): string[] => {
-  p.depe
+  p.depe;
   return [
     ...Object.keys(p.optionalDependencies || {}),
     ...Object.keys(p.devDependencies || {}),
     ...Object.keys(p.dependencies || {}),
     ...Object.keys(p.peerDependencies || {}),
-    ...p.bundledDependencies || []
-  ]
-}
-
+    ...(p.bundledDependencies || []),
+  ];
+};

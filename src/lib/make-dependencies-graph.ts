@@ -17,12 +17,23 @@ export type MakeDependenciesGraph = (
 ) => Promise<Result<MakeDependenciesGraphSuccess, MakeDependenciesGraphError>>;
 
 type Dependencies = {
-  readPackageJson: ReadPackageJson
-}
+  readPackageJson: ReadPackageJson;
+};
 
-export const makeDependenciesGraph: (deps: Dependencies) => MakeDependenciesGraph = (deps) => async (rootPackage) => {
-  const packagesResult = Result.all(...await Promise.all(rootPackage.workspaces.map(({ relativePath }) => deps.readPackageJson(rootPackage, join(relativePath, 'package.json')))))
-  const edgesResult = packagesResult.map(makeEdgesFromPackages)
-  const graphResult = edgesResult.map(e => makeGraph([...e]))
-  return graphResult.mapErr(e => ({kind: 'unknownError', error: new Error(e.kind)}))
+export const makeDependenciesGraph: (
+  deps: Dependencies,
+) => MakeDependenciesGraph = (deps) => async (rootPackage) => {
+  const packagesResult = Result.all(
+    ...(await Promise.all(
+      rootPackage.workspaces.map(({ relativePath }) =>
+        deps.readPackageJson(rootPackage, join(relativePath, "package.json")),
+      ),
+    )),
+  );
+  const edgesResult = packagesResult.map(makeEdgesFromPackages);
+  const graphResult = edgesResult.map((e) => makeGraph([...e]));
+  return graphResult.mapErr((e) => ({
+    kind: "unknownError",
+    error: new Error(e.kind),
+  }));
 };

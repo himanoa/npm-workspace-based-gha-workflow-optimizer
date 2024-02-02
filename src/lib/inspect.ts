@@ -29,9 +29,9 @@ export const makeInspect =
         .exhaustive();
 
       const graphResult = await deps.makeDependenciesGraph(rootPackage);
-      graphResult.map(graph => {
-        console.dir(graph)
-      })
+      graphResult.map((graph) => {
+        console.dir(graph);
+      });
       return;
     }
     throw new Error("unimplemented");

@@ -1,4 +1,4 @@
-import { BiMap, HashMultiMapHashValue } from '@rimbu/core'
+import { BiMap, HashMultiMapHashValue } from "@rimbu/core";
 
 export type Id = number;
 
@@ -19,33 +19,33 @@ class IncrementalIdGenerator {
   }
 }
 
-
-const range = (begin: number, end: number) => ([...Array(end - begin)].map((_, i) => (begin + i)));
+const range = (begin: number, end: number) =>
+  [...Array(end - begin)].map((_, i) => begin + i);
 
 export const makeGraph = <T>(edges: Edge<T>[]): GraphAndIdValueMap<T> => {
   const idGen = new IncrementalIdGenerator();
   const initialIdToValue = BiMap.empty<Id, T>();
 
-  const idToValue  = edges.reduce((acc, {from, to}) => {
-    return acc.set(idGen.generate(), from).set(idGen.generate(), to)
-  }, initialIdToValue)
+  const idToValue = edges.reduce((acc, { from, to }) => {
+    return acc.set(idGen.generate(), from).set(idGen.generate(), to);
+  }, initialIdToValue);
 
-  const labeledEdges = edges.map(({from, to}) => {
-    const fromId = idToValue.getKey(from)
-    const toId = idToValue.getKey(to)
-    if(fromId === undefined || toId === undefined) {
-      throw new Error("unreachable")
+  const labeledEdges = edges.map(({ from, to }) => {
+    const fromId = idToValue.getKey(from);
+    const toId = idToValue.getKey(to);
+    if (fromId === undefined || toId === undefined) {
+      throw new Error("unreachable");
     }
-    return [fromId, toId] as const
-  })
+    return [fromId, toId] as const;
+  });
 
-  const groupedEdges = HashMultiMapHashValue.from(labeledEdges)
+  const groupedEdges = HashMultiMapHashValue.from(labeledEdges);
 
-  const max = groupedEdges.streamKeys().max() || 0
+  const max = groupedEdges.streamKeys().max() || 0;
 
-  const graph = range(0, max + 1).map(i => {
-    return groupedEdges.getValues(i).toArray()
-  })
+  const graph = range(0, max + 1).map((i) => {
+    return groupedEdges.getValues(i).toArray();
+  });
 
-  return { graph, idToValue }
+  return { graph, idToValue };
 };
