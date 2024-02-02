@@ -4,10 +4,10 @@ import { Ok } from "ts-results";
 
 describe("inspect", () => {
   describe("if workspace only mode", () => {
-    it("called inspectDependencies function", async () => {
-      const inspectDependencies = vi.fn();
+    it("called makeDependenciesGraph function", async () => {
+      const makeDependenciesGraph = vi.fn();
       const inspect = makeInspect({
-        inspectDependencies,
+        makeDependenciesGraph: makeDependenciesGraph,
         readRootPackage: async () =>
           Ok({
             name: "root",
@@ -15,11 +15,11 @@ describe("inspect", () => {
           }),
       });
       await inspect({ packageName: "foo" });
-      expect(inspectDependencies).toBeCalled();
+      expect(makeDependenciesGraph).toBeCalled();
     });
 
     it("called readRootPackage function", async () => {
-      const inspectDependencies = vi.fn();
+      const makeDependenciesGraph = vi.fn();
       const readRootPackage = vi.fn(async () =>
         Ok({
           name: "root",
@@ -28,7 +28,7 @@ describe("inspect", () => {
       );
 
       const inspect = makeInspect({
-        inspectDependencies,
+        makeDependenciesGraph: makeDependenciesGraph,
         readRootPackage,
       });
       await inspect({ packageName: "foo" });

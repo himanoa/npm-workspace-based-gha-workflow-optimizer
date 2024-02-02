@@ -1,12 +1,12 @@
 import { BiMap, HashMultiMapHashValue } from '@rimbu/core'
 
-type Id = number;
+export type Id = number;
 
-type Graph = Id[][];
+export type Graph = Id[][];
 
-type Edge<T> = { from: T; to: T };
+export type Edge<T> = { from: T; to: T };
 
-type MakeGraphResult<T> = {
+export type GraphAndIdValueMap<T> = {
   graph: Graph;
   idToValue: BiMap<Id, T>;
 };
@@ -22,7 +22,7 @@ class IncrementalIdGenerator {
 
 const range = (begin: number, end: number) => ([...Array(end - begin)].map((_, i) => (begin + i)));
 
-export const makeGraph = <T>(edges: Edge<T>[]): MakeGraphResult<T> => {
+export const makeGraph = <T>(edges: Edge<T>[]): GraphAndIdValueMap<T> => {
   const idGen = new IncrementalIdGenerator();
   const initialIdToValue = BiMap.empty<Id, T>();
 

@@ -1,5 +1,5 @@
 import { match } from "ts-pattern";
-import { InspectDependencies } from "./inspect-dependencies";
+import { MakeDependenciesGraph } from "./make-dependencies-graph";
 import { ReadRootPackage } from "./read-root-package";
 
 type AllOptions = null;
@@ -10,7 +10,7 @@ type WorkspaceOnlyOptions = {
 type InspectOptions = AllOptions | WorkspaceOnlyOptions;
 
 type Dependencies = {
-  inspectDependencies: InspectDependencies;
+  makeDependenciesGraph: MakeDependenciesGraph;
   readRootPackage: ReadRootPackage;
 };
 
@@ -28,7 +28,10 @@ export const makeInspect =
         })
         .exhaustive();
 
-      await deps.inspectDependencies(rootPackage);
+      const graphResult = await deps.makeDependenciesGraph(rootPackage);
+      graphResult.map(graph => {
+        console.dir(graph)
+      })
       return;
     }
     throw new Error("unimplemented");
