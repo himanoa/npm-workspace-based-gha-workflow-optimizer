@@ -1,5 +1,4 @@
-import { BiMap } from '@rimbu/core'
-import groupBy from 'object.groupby'
+import { BiMap, HashMultiMapHashValue } from '@rimbu/core'
 
 type Id = number;
 
@@ -13,8 +12,7 @@ type MakeGraphResult<T> = {
 };
 
 class IncrementalIdGenerator {
-  private id: number = 0;
-  constructor() {}
+  constructor(private id: number = 0) {}
 
   generate(): number {
     return this.id++;
@@ -38,21 +36,15 @@ export const makeGraph = <T>(edges: Edge<T>[]): MakeGraphResult<T> => {
     if(fromId === undefined || toId === undefined) {
       throw new Error("unreachable")
     }
-    return [fromId, toId]
+    return [fromId, toId] as const
   })
 
-  const groupedEdges = groupBy(labeledEdges, ([fromId]) => fromId)
+  const groupedEdges = HashMultiMapHashValue.from(labeledEdges)
 
-  const groupedEdgesWithoutFromId = Object.entries(groupedEdges).reduce<Record<string, number[]>>((acc, [key, values]) => ({ ...acc, [key]: values.map(([, to]) => to) }), {})
-
-  const keyNumbers = Object.keys(groupedEdgesWithoutFromId).map((x) => parseInt(x, 10))
-  const max = Math.max(...keyNumbers)
+  const max = groupedEdges.streamKeys().max() || 0
 
   const graph = range(0, max + 1).map(i => {
-    if(groupedEdgesWithoutFromId[i.toString()] == undefined) {
-      return []
-    }
-    return groupedEdgesWithoutFromId[i]
+    return groupedEdges.getValues(i).toArray()
   })
 
   return { graph, idToValue }
