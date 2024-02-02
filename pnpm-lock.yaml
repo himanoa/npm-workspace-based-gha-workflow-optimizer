@@ -49,6 +49,9 @@ devDependencies:
   mock-fs:
     specifier: 5.2.0
     version: 5.2.0
+  package-json-type:
+    specifier: ^1.0.3
+    version: 1.0.3
   prettier:
     specifier: 3.2.4
     version: 3.2.4
@@ -2312,6 +2315,10 @@ packages:
     engines: {node: '>=10'}
     dependencies:
       p-limit: 3.1.0
+    dev: true
+
+  /package-json-type@1.0.3:
+    resolution: {integrity: sha512-Bey4gdRuOwDbS8Fj1qA3/pTq5r8pqiI5E3tjSqCdhaLSsyGG364VFzXLTIexN5AaNGe/vgdBzLfoKdr7EVg2KQ==}
     dev: true
 
   /parent-module@1.0.1:

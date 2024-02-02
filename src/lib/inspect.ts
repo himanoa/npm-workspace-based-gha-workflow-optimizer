@@ -28,7 +28,7 @@ export const makeInspect =
         })
         .exhaustive();
 
-      await deps.inspectDependencies("unsupported", rootPackage);
+      await deps.inspectDependencies(rootPackage);
       return;
     }
     throw new Error("unimplemented");
