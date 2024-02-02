@@ -1,6 +1,6 @@
-import { match } from 'ts-pattern'
+import { match } from "ts-pattern";
 import { InspectDependencies } from "./inspect-dependencies";
-import { ReadRootPackage } from './read-root-package';
+import { ReadRootPackage } from "./read-root-package";
 
 type AllOptions = null;
 type WorkspaceOnlyOptions = {
@@ -11,25 +11,24 @@ type InspectOptions = AllOptions | WorkspaceOnlyOptions;
 
 type Dependencies = {
   inspectDependencies: InspectDependencies;
-  readRootPackage: ReadRootPackage
+  readRootPackage: ReadRootPackage;
 };
 
 export const makeInspect =
-  (deps: Dependencies) =>
-  async (options: InspectOptions) => {
+  (deps: Dependencies) => async (options: InspectOptions) => {
     if (options?.packageName) {
-      const rootPackageResult = await deps.readRootPackage()
+      const rootPackageResult = await deps.readRootPackage();
       const rootPackage = await match(rootPackageResult)
-        .with({ ok: true }, async ({val: rootPackage}) => {
-          return rootPackage
+        .with({ ok: true }, async ({ val: rootPackage }) => {
+          return rootPackage;
         })
-        .with({err: true}, async () => {
-          console.error('Not found package.json')
-          process.exit(1)
+        .with({ err: true }, async () => {
+          console.error("Not found package.json");
+          process.exit(1);
         })
-        .exhaustive()
+        .exhaustive();
 
-      await deps.inspectDependencies('unsupported', rootPackage);
+      await deps.inspectDependencies("unsupported", rootPackage);
       return;
     }
     throw new Error("unimplemented");

@@ -17,7 +17,9 @@
   "license": "ISC",
   "dependencies": {
     "@npmcli/map-workspaces": "3.0.4",
+    "@rimbu/core": "^2.0.0",
     "citty": "0.1.5",
+    "object.groupby": "^1.0.1",
     "ts-results": "3.3.0",
     "tslib": "2.6.2"
   },
@@ -25,6 +27,7 @@
     "@types/mock-fs": "4.13.4",
     "@types/node": "20.11.15",
     "@types/npmcli__map-workspaces": "3.0.4",
+    "@types/object.groupby": "^1.0.3",
     "@typescript-eslint/eslint-plugin": "6.20.0",
     "@typescript-eslint/parser": "6.20.0",
     "eslint": "8.56.0",
