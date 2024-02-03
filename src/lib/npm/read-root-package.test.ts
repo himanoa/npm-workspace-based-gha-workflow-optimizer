@@ -1,6 +1,6 @@
 import { readRootPackage } from "./read-root-package";
 import { describe, it, expect } from "vitest";
-import { makeDummyMonorepo } from "./testing/make-dummy-monorepo";
+import { makeDummyMonorepo } from "../testing/make-dummy-monorepo";
 import mock from "mock-fs";
 
 mock(makeDummyMonorepo());

@@ -1,8 +1,8 @@
 import mapWorkspaces from "@npmcli/map-workspaces";
 import { Err, Ok, Result } from "ts-results";
-import { RootPackage } from "./root-package";
 import { readFile } from "fs/promises";
-import { Workspace } from "./workspace";
+import { Workspace } from "../dependencies/workspace";
+import { RootPackage } from "../dependencies/root-package";
 
 type ReadRootPackageSuccess = RootPackage;
 

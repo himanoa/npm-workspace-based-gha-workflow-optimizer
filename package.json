@@ -10,7 +10,8 @@
     "lint": "eslint -c .eslintrc.js . --ext ts",
     "start": "node dist/cli.js",
     "format:write": "prettier --write src/**/*",
-    "format": "prettier src/**/*"
+    "format": "prettier src/**/*",
+    "compile": "tsc --noEmit"
   },
   "keywords": [],
   "author": "",

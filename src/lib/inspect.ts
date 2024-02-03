@@ -1,6 +1,6 @@
 import { match } from "ts-pattern";
-import { MakeDependenciesGraph } from "./make-dependencies-graph";
-import { ReadRootPackage } from "./read-root-package";
+import { MakeDependenciesGraph } from "./dependencies/make-dependencies-graph";
+import { ReadRootPackage } from "./npm/read-root-package";
 
 type AllOptions = null;
 type WorkspaceOnlyOptions = {

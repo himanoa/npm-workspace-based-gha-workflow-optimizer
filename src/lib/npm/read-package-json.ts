@@ -1,8 +1,8 @@
-import { Package } from "./package";
 import { Ok, Err, Result } from "ts-results";
-import { RootPackage } from "./root-package";
 import { readFile } from "fs/promises";
 import { mergeDeps } from "./merge-deps";
+import { Package } from "../dependencies/package";
+import { RootPackage } from "../dependencies/root-package";
 
 type ReadPackageJsonSuccess = Package;
 
