@@ -1,5 +1,5 @@
-import { Package } from "./package";
-import { Edge } from "./digraph";
+import { Package } from "../dependencies/package";
+import { Edge } from "../graph/digraph";
 
 export type MakeEdgesFromPackages = (
   pkgs: ReadonlyArray<Package>,

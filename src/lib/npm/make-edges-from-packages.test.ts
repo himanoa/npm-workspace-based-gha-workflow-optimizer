@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
-import { Package } from "./package";
 import { makeEdgesFromPackages } from "./make-edges-from-packages";
+import { Package } from "../dependencies/package";
 
 describe("makeEdgesFromPackages", () => {
   it("return to edges", () => {

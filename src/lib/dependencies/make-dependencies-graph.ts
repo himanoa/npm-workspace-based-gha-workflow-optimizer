@@ -1,9 +1,9 @@
 import { Result } from "ts-results";
 import { RootPackage } from "./root-package";
-import { ReadPackageJson } from "./read-package-json";
 import { join } from "path";
-import { makeEdgesFromPackages } from "./make-edges-from-packages";
-import { GraphAndIdValueMap, makeGraph } from "./digraph";
+import { ReadPackageJson } from "../npm/read-package-json";
+import { GraphAndIdValueMap, makeGraph } from "../graph/digraph";
+import { makeEdgesFromPackages } from "../npm/make-edges-from-packages";
 
 export type MakeDependenciesGraphSuccess = GraphAndIdValueMap<string>;
 
