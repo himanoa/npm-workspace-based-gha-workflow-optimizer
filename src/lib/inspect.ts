@@ -21,8 +21,8 @@ export const makeInspect = (deps: Dependencies) => async () => {
     .exhaustive();
 
   const graphResult = await deps.makeDependenciesGraph(rootPackage);
-  graphResult.map(({graph, idToValue}) => {
-    console.log(convertMermaidDsl(graph, idToValue))
+  graphResult.map(({ graph, idToValue }) => {
+    console.log(convertMermaidDsl(graph, idToValue));
   });
   return;
 };

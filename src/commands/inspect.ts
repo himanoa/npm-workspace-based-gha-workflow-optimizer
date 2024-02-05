@@ -12,11 +12,11 @@ export default defineCommand({
   run: async () => {
     const inspect = makeInspect({
       makeDependenciesGraph: makeDependenciesGraph({
-        readPackageJson: readPackageJson
+        readPackageJson: readPackageJson,
       }),
-      readRootPackage: readRootPackage
-    })
+      readRootPackage: readRootPackage,
+    });
 
-    await inspect()
+    await inspect();
   },
 });
