@@ -2,21 +2,13 @@ import { match } from "ts-pattern";
 import { MakeDependenciesGraph } from "./dependencies/make-dependencies-graph";
 import { ReadRootPackage } from "./npm/read-root-package";
 
-type AllOptions = null;
-type WorkspaceOnlyOptions = {
-  packageName: string;
-};
-
-type InspectOptions = AllOptions | WorkspaceOnlyOptions;
-
 type Dependencies = {
   makeDependenciesGraph: MakeDependenciesGraph;
   readRootPackage: ReadRootPackage;
 };
 
 export const makeInspect =
-  (deps: Dependencies) => async (options: InspectOptions) => {
-    if (options?.packageName) {
+  (deps: Dependencies) => async () => {
       const rootPackageResult = await deps.readRootPackage();
       const rootPackage = await match(rootPackageResult)
         .with({ ok: true }, async ({ val: rootPackage }) => {
@@ -33,6 +25,4 @@ export const makeInspect =
         console.dir(graph);
       });
       return;
-    }
-    throw new Error("unimplemented");
   };
