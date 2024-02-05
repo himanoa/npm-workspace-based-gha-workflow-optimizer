@@ -49,3 +49,9 @@ export const makeGraph = <T>(edges: Edge<T>[]): GraphAndIdValueMap<T> => {
 
   return { graph, idToValue };
 };
+
+export const convertToMap = (graph: Graph): Map<Id, ReadonlyArray<Id>> => {
+  return graph.reduce((acc, dependencies, id) => {
+    return new Map([...Array.from(acc), [id, dependencies]])
+  }, new Map())
+}

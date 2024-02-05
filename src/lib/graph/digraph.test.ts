@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { makeGraph } from "./digraph";
+import { convertToMap, makeGraph } from "./digraph";
 
 describe("makeGraph", () => {
   it("test", () => {
@@ -102,3 +102,9 @@ describe("makeGraph", () => {
     `);
   });
 });
+
+describe("convertToMap", () => {
+  it('is return to Map([[0, [1]], [1, [2]], [2, []]])', () => {
+    expect(convertToMap([[1], [2], []])).toStrictEqual(new Map([[0, [1]], [1, [2]], [2, []]]))
+  })
+})
