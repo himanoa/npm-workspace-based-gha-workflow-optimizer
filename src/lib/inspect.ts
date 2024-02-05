@@ -1,6 +1,7 @@
 import { match } from "ts-pattern";
 import { MakeDependenciesGraph } from "./dependencies/make-dependencies-graph";
 import { ReadRootPackage } from "./npm/read-root-package";
+import { convertMermaidDsl } from "./graph/convert-mermaid-dsl";
 
 type Dependencies = {
   makeDependenciesGraph: MakeDependenciesGraph;
@@ -20,8 +21,8 @@ export const makeInspect = (deps: Dependencies) => async () => {
     .exhaustive();
 
   const graphResult = await deps.makeDependenciesGraph(rootPackage);
-  graphResult.map((graph) => {
-    console.dir(graph);
+  graphResult.map(({ graph, idToValue }) => {
+    console.log(convertMermaidDsl(graph, idToValue));
   });
   return;
 };
