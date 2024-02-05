@@ -14,8 +14,10 @@ describe('convertMermaidDsl', () => {
       expect(convertMermaidDsl([[]], BiMap.of([0, 'yyy']))).toStrictEqual('graph\n0["yyy"]\n')
     })
   })
-  it.todo("is return to labeled mermaid graph dsl", () => {
-    // convertMermaidDsl()
+
+  it("is return to labeled mermaid graph dsl", () => {
+    expect(convertMermaidDsl([[1,2], [2,3], [], []], BiMap.of([0, 'a'], [1, 'b'], [2, 'c'], [3, 'd'])))
+    .toStrictEqual('graph\n0["a"]\n1["b"]\n2["c"]\n3["d"]\n0-->1\n0-->2\n1-->2\n1-->3')
   })
 })
 
