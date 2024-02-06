@@ -10,7 +10,7 @@ type Dependencies = {
   getWorkflowFiles: (packageName: string) => string[];
 };
 
-export const applyPathsFilter =
+export const makeApplyPathsFilter =
   (deps: Dependencies) =>
   async (
     graph: Graph,
@@ -27,7 +27,7 @@ export const applyPathsFilter =
         const pathsFilter = makePathsFilter(graph, id, rootPackage, idToValue);
 
         const workflowPaths = deps.getWorkflowFiles(
-          idToValue.getValue(rootId) || "",
+          idToValue.getValue(id) || "",
         );
         const workflowYamls = await Promise.all(
           workflowPaths.map(async (p) => [p, await deps.readFile(p)] as const),
@@ -46,9 +46,13 @@ export const applyPathsFilter =
               {
                 ...workflow,
                 on: {
-                  ...workflow.on,
+                  ...(Array.isArray(workflow.on) ? 
+                    {...workflow.on.reduce((acc: object, k: object) => (typeof k === 'string' ? { ...acc, [k]: {} } : { ...acc, ...k }), {} as  object)} : {}),
                   push: {
-                    ...workflow.on.push,
+                    paths: pathsFilter,
+                  },
+                  pull_request: {
+                    ...workflow.on["pull_request"],
                     paths: pathsFilter,
                   },
                 },
@@ -59,7 +63,7 @@ export const applyPathsFilter =
 
         await Promise.all(
           appliedPathsFilterWorkflows.map(async ([path, workflow]) =>
-            deps.writeFile(path, stringify(workflow)),
+            deps.writeFile(path, stringify(workflow, { strict: true, aliasDuplicateObjects: false })),
           ),
         );
       }),
