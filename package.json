@@ -23,7 +23,8 @@
     "mermaid": "10.8.0",
     "object.groupby": "^1.0.1",
     "ts-results": "3.3.0",
-    "tslib": "2.6.2"
+    "tslib": "2.6.2",
+    "yaml": "2.3.4"
   },
   "devDependencies": {
     "@types/mock-fs": "4.13.4",
