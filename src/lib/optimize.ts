@@ -1,10 +1,12 @@
 import { match } from "ts-pattern";
 import { MakeDependenciesGraph } from "./dependencies/make-dependencies-graph";
 import { ReadRootPackage } from "./npm/read-root-package";
+import { ApplyPathsFilter } from "./gha/apply-paths-filter";
 
 type Dependencies = {
   readRootPackage: ReadRootPackage;
   makeDependenciesGraph: MakeDependenciesGraph;
+  applyPathsFilter: ApplyPathsFilter;
 };
 
 export const makeOptimize = (deps: Dependencies) => async () => {
@@ -18,8 +20,9 @@ export const makeOptimize = (deps: Dependencies) => async () => {
       process.exit(1);
     })
     .exhaustive();
-
   const graphResult = await deps.makeDependenciesGraph(rootPackage);
-  console.dir(graphResult);
+  graphResult.map(async ({ graph, idToValue }) => {
+    await deps.applyPathsFilter(graph, rootPackage, idToValue);
+  });
   return;
 };

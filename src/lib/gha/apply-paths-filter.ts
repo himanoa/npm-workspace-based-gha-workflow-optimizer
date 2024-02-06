@@ -83,3 +83,5 @@ export const makeApplyPathsFilter =
       }),
     );
   };
+
+export type ApplyPathsFilter = ReturnType<typeof makeApplyPathsFilter>;
