@@ -2,11 +2,14 @@ import { describe, it, expect, vi } from "vitest";
 import { makeApplyPathsFilter } from "./apply-paths-filter";
 import { BiMap } from "@rimbu/core";
 
-describe('applyPathFilter', () => {
+describe("applyPathFilter", () => {
   it("changed workflow yamls", async () => {
-    const writeFile = vi.fn()
+    const writeFile = vi.fn();
     const applyPathsFilter = makeApplyPathsFilter({
-      getWorkflowFiles: (packageName: string) => [`./github/${packageName}-test.yml`, `./github/${packageName}-lint.yml`],
+      getWorkflowFiles: (packageName: string) => [
+        `./github/${packageName}-test.yml`,
+        `./github/${packageName}-lint.yml`,
+      ],
       readFile: async () => {
         return `
 name: test
@@ -26,12 +29,25 @@ jobs:
         version: 8
     - run: pnpm install
     - run: pnpm test
-`
+`;
       },
-      writeFile: writeFile
-    })
+      writeFile: writeFile,
+    });
 
-    await applyPathsFilter([[1], [2], [3], []], 0, {name: 'dummy', workspaces: [{name: 'a', relativePath: 'a'}, {name: 'b', relativePath: 'b'}, {name: 'c', relativePath: 'c'}, {name: 'd', relativePath: 'd'}]}, BiMap.of([0, 'a'], [1, 'b'], [2, 'c'], [3, 'd']))
+    await applyPathsFilter(
+      [[1], [2], [3], []],
+      0,
+      {
+        name: "dummy",
+        workspaces: [
+          { name: "a", relativePath: "a" },
+          { name: "b", relativePath: "b" },
+          { name: "c", relativePath: "c" },
+          { name: "d", relativePath: "d" },
+        ],
+      },
+      BiMap.of([0, "a"], [1, "b"], [2, "c"], [3, "d"]),
+    );
 
     expect(writeFile.mock.calls).toMatchInlineSnapshot(`
       [
@@ -268,13 +284,16 @@ jobs:
       ",
         ],
       ]
-    `)
-  })
+    `);
+  });
 
   it("changed workflow yamls2", async () => {
-    const writeFile = vi.fn()
+    const writeFile = vi.fn();
     const applyPathsFilter = makeApplyPathsFilter({
-      getWorkflowFiles: (packageName: string) => [`./github/${packageName}-test.yml`, `./github/${packageName}-lint.yml`],
+      getWorkflowFiles: (packageName: string) => [
+        `./github/${packageName}-test.yml`,
+        `./github/${packageName}-lint.yml`,
+      ],
       readFile: async () => {
         return `
 name: test
@@ -296,12 +315,25 @@ jobs:
         version: 8
     - run: pnpm install
     - run: pnpm test
-`
+`;
       },
-      writeFile: writeFile
-    })
+      writeFile: writeFile,
+    });
 
-    await applyPathsFilter([[1], [2], [3], []], 0, {name: 'dummy', workspaces: [{name: 'a', relativePath: 'a'}, {name: 'b', relativePath: 'b'}, {name: 'c', relativePath: 'c'}, {name: 'd', relativePath: 'd'}]}, BiMap.of([0, 'a'], [1, 'b'], [2, 'c'], [3, 'd']))
+    await applyPathsFilter(
+      [[1], [2], [3], []],
+      0,
+      {
+        name: "dummy",
+        workspaces: [
+          { name: "a", relativePath: "a" },
+          { name: "b", relativePath: "b" },
+          { name: "c", relativePath: "c" },
+          { name: "d", relativePath: "d" },
+        ],
+      },
+      BiMap.of([0, "a"], [1, "b"], [2, "c"], [3, "d"]),
+    );
 
     expect(writeFile.mock.calls).toMatchInlineSnapshot(`
       [
@@ -578,6 +610,6 @@ jobs:
       ",
         ],
       ]
-    `)
-  })
-})
+    `);
+  });
+});

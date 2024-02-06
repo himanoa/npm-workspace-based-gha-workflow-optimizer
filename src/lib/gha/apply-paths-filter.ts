@@ -46,8 +46,17 @@ export const makeApplyPathsFilter =
               {
                 ...workflow,
                 on: {
-                  ...(Array.isArray(workflow.on) ? 
-                    {...workflow.on.reduce((acc: object, k: object) => (typeof k === 'string' ? { ...acc, [k]: {} } : { ...acc, ...k }), {} as  object)} : {}),
+                  ...(Array.isArray(workflow.on)
+                    ? {
+                        ...workflow.on.reduce(
+                          (acc: object, k: object) =>
+                            typeof k === "string"
+                              ? { ...acc, [k]: {} }
+                              : { ...acc, ...k },
+                          {} as object,
+                        ),
+                      }
+                    : {}),
                   push: {
                     paths: pathsFilter,
                   },
@@ -63,7 +72,13 @@ export const makeApplyPathsFilter =
 
         await Promise.all(
           appliedPathsFilterWorkflows.map(async ([path, workflow]) =>
-            deps.writeFile(path, stringify(workflow, { strict: true, aliasDuplicateObjects: false })),
+            deps.writeFile(
+              path,
+              stringify(workflow, {
+                strict: true,
+                aliasDuplicateObjects: false,
+              }),
+            ),
           ),
         );
       }),
