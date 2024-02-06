@@ -104,15 +104,21 @@ describe("makeGraph", () => {
 });
 
 describe("convertToMap", () => {
-  it('is return to Map([[0, [1]], [1, [2]], [2, []]])', () => {
-    expect(convertToMap([[1], [2], []])).toStrictEqual(new Map([[0, [1]], [1, [2]], [2, []]]))
-  })
-})
-
+  it("is return to Map([[0, [1]], [1, [2]], [2, []]])", () => {
+    expect(convertToMap([[1], [2], []])).toStrictEqual(
+      new Map([
+        [0, [1]],
+        [1, [2]],
+        [2, []],
+      ]),
+    );
+  });
+});
 
 describe("makeDigraphWalker", () => {
   it("is return to [0,1,2,3,4]", () => {
-    expect(Array.from(makeDigraphWalker(0, [[1], [2], [3,4], [], []]))).toMatchInlineSnapshot(`
+    expect(Array.from(makeDigraphWalker(0, [[1], [2], [3, 4], [], []])))
+      .toMatchInlineSnapshot(`
       [
         0,
         1,
@@ -120,6 +126,6 @@ describe("makeDigraphWalker", () => {
         3,
         4,
       ]
-    `)
-  })
-})
+    `);
+  });
+});

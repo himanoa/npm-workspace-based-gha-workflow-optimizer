@@ -1,11 +1,11 @@
-import { defineCommand } from 'citty'
+import { defineCommand } from "citty";
 
 export default defineCommand({
   meta: {
-    name: 'optimize',
-    description: 'Apply paths filter to Github actions workflow files'
+    name: "optimize",
+    description: "Apply paths filter to Github actions workflow files",
   },
   run: async () => {
-    throw new Error()
-  }
-})
+    throw new Error();
+  },
+});

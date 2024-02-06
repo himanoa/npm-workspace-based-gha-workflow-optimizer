@@ -52,23 +52,23 @@ export const makeGraph = <T>(edges: Edge<T>[]): GraphAndIdValueMap<T> => {
 
 export const convertToMap = (graph: Graph): Map<Id, ReadonlyArray<Id>> => {
   return graph.reduce((acc, dependencies, id) => {
-    return new Map([...Array.from(acc), [id, dependencies]])
-  }, new Map())
-}
+    return new Map([...Array.from(acc), [id, dependencies]]);
+  }, new Map());
+};
 
 export function* makeDigraphWalker(rootId: Id, graph: Graph): Generator<Id> {
-  const visitted = new Set<Id>()
+  const visitted = new Set<Id>();
 
-  function *walker(node: Id): Generator<Id> {
-    yield node
-    visitted.add(node)
+  function* walker(node: Id): Generator<Id> {
+    yield node;
+    visitted.add(node);
 
-    for(const neighbor of graph[node]) {
-      if(!visitted.has(neighbor)) {
-        yield* walker(neighbor)
+    for (const neighbor of graph[node]) {
+      if (!visitted.has(neighbor)) {
+        yield* walker(neighbor);
       }
     }
   }
 
-  yield* walker(rootId)
+  yield* walker(rootId);
 }

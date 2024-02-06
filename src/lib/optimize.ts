@@ -1,11 +1,11 @@
 import { match } from "ts-pattern";
-import { MakeDependenciesGraph } from "./dependencies/make-dependencies-graph"
-import { ReadRootPackage } from "./npm/read-root-package"
+import { MakeDependenciesGraph } from "./dependencies/make-dependencies-graph";
+import { ReadRootPackage } from "./npm/read-root-package";
 
 type Dependencies = {
-  readRootPackage: ReadRootPackage,
-  makeDependenciesGraph: MakeDependenciesGraph
-}
+  readRootPackage: ReadRootPackage;
+  makeDependenciesGraph: MakeDependenciesGraph;
+};
 
 export const makeOptimize = (deps: Dependencies) => async () => {
   const rootPackageResult = await deps.readRootPackage();
@@ -20,6 +20,6 @@ export const makeOptimize = (deps: Dependencies) => async () => {
     .exhaustive();
 
   const graphResult = await deps.makeDependenciesGraph(rootPackage);
-  console.dir(graphResult)
+  console.dir(graphResult);
   return;
 };
