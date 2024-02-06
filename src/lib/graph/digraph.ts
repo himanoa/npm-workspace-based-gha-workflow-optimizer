@@ -55,3 +55,20 @@ export const convertToMap = (graph: Graph): Map<Id, ReadonlyArray<Id>> => {
     return new Map([...Array.from(acc), [id, dependencies]])
   }, new Map())
 }
+
+export function* makeDigraphWalker(rootId: Id, graph: Graph): Generator<Id> {
+  const visitted = new Set<Id>()
+
+  function *walker(node: Id): Generator<Id> {
+    yield node
+    visitted.add(node)
+
+    for(const neighbor of graph[node]) {
+      if(!visitted.has(neighbor)) {
+        yield* walker(neighbor)
+      }
+    }
+  }
+
+  yield* walker(rootId)
+}

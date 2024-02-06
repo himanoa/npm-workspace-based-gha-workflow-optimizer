@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { convertToMap, makeGraph } from "./digraph";
+import { convertToMap, makeDigraphWalker, makeGraph } from "./digraph";
 
 describe("makeGraph", () => {
   it("test", () => {
@@ -106,5 +106,20 @@ describe("makeGraph", () => {
 describe("convertToMap", () => {
   it('is return to Map([[0, [1]], [1, [2]], [2, []]])', () => {
     expect(convertToMap([[1], [2], []])).toStrictEqual(new Map([[0, [1]], [1, [2]], [2, []]]))
+  })
+})
+
+
+describe("makeDigraphWalker", () => {
+  it("is return to [0,1,2,3,4]", () => {
+    expect(Array.from(makeDigraphWalker(0, [[1], [2], [3,4], [], []]))).toMatchInlineSnapshot(`
+      [
+        0,
+        1,
+        2,
+        3,
+        4,
+      ]
+    `)
   })
 })
