@@ -7,7 +7,8 @@ const program = defineCommand({
     description: process.env.package_description,
   },
   subCommands: {
-    inspect: () => import('./commands/inspect').then(r => r.default)
+    inspect: () => import('./commands/inspect').then(r => r.default),
+    optimize: () => import('./commands/optimize').then(r => r.default)
   },
 })
 
