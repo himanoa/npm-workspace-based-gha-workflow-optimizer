@@ -6,7 +6,7 @@ describe("applyPathFilter", () => {
   it("changed workflow yamls", async () => {
     const writeFile = vi.fn();
     const applyPathsFilter = makeApplyPathsFilter({
-      getWorkflowFiles: (packageName: string) => [
+      getWorkflowFiles: async (packageName: string) => [
         `./github/${packageName}-test.yml`,
         `./github/${packageName}-lint.yml`,
       ],
@@ -36,7 +36,6 @@ jobs:
 
     await applyPathsFilter(
       [[1], [2], [3], []],
-      0,
       {
         name: "dummy",
         workspaces: [
@@ -290,7 +289,7 @@ jobs:
   it("changed workflow yamls2", async () => {
     const writeFile = vi.fn();
     const applyPathsFilter = makeApplyPathsFilter({
-      getWorkflowFiles: (packageName: string) => [
+      getWorkflowFiles: async (packageName: string) => [
         `./github/${packageName}-test.yml`,
         `./github/${packageName}-lint.yml`,
       ],
@@ -322,7 +321,6 @@ jobs:
 
     await applyPathsFilter(
       [[1], [2], [3], []],
-      0,
       {
         name: "dummy",
         workspaces: [

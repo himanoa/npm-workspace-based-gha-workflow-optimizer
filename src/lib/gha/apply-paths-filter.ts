@@ -7,14 +7,13 @@ import { parse, stringify } from "yaml";
 type Dependencies = {
   readFile: (path: string) => Promise<string>;
   writeFile: (path: string, body: string) => Promise<void>;
-  getWorkflowFiles: (packageName: string) => string[];
+  getWorkflowFiles: (packageName: string) => Promise<string[]>;
 };
 
 export const makeApplyPathsFilter =
   (deps: Dependencies) =>
   async (
     graph: Graph,
-    rootId: Id,
     rootPackage: RootPackage,
     idToValue: BiMap<Id, string>,
   ) => {
@@ -26,7 +25,7 @@ export const makeApplyPathsFilter =
         }
         const pathsFilter = makePathsFilter(graph, id, rootPackage, idToValue);
 
-        const workflowPaths = deps.getWorkflowFiles(
+        const workflowPaths = await deps.getWorkflowFiles(
           idToValue.getValue(id) || "",
         );
         const workflowYamls = await Promise.all(
