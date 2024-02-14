@@ -68,6 +68,9 @@ on:
   push:
     paths:
       - 'workspaces/a/**'
+  pull_request:
+    paths:
+      - 'workspaces/a/**'
 
 jobs:
   format:
