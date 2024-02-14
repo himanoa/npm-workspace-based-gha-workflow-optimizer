@@ -2,6 +2,7 @@
   "name": "npm-workspace-gha-workflow-optimizer",
   "version": "1.0.0",
   "description": "",
+  "type": "commonjs",
   "bin": "./dist/cli.js",
   "scripts": {
     "test": "vitest run",
@@ -14,8 +15,11 @@
     "compile": "tsc --noEmit"
   },
   "keywords": [],
+  "files": [
+    "dist/cli.js"
+  ],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "@npmcli/map-workspaces": "3.0.4",
     "@rimbu/core": "^2.0.0",
