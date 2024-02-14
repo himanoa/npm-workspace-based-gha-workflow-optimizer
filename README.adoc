@@ -1,6 +1,10 @@
 == @himanoa/npm-workspace-based-gha-workflow-optimizer
 
-`@himanoa/npm-workspace-based-gha-workflow-optimizer` is a tool designed to optimize the execution of GitHub Actions workflows based on the npm workspace configuration. It analyzes the workspace definitions in `package.json` and automatically generates `paths` filters for workflow definitions using package names as prefixes. This ensures that workflows are only triggered by relevant changes.
+`@himanoa/npm-workspace-based-gha-workflow-optimizer` is a tool designed to optimize the execution of GitHub Actions workflows based on the npm workspace configuration.
+
+It analyzes the workspace definitions in `package.json` and automatically generates `paths` filters for workflow definitions using package names as prefixes.
+
+This ensures that workflows are only triggered by relevant changes.
 
 === Features
 
