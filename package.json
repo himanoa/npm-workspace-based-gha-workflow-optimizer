@@ -18,7 +18,8 @@
     "start": "node dist/cli.js",
     "format:write": "prettier --write src/**/*",
     "format": "prettier src/**/*",
-    "compile": "tsc --noEmit"
+    "compile": "tsc --noEmit",
+    "release": "changeset publish"
   },
   "keywords": [],
   "files": [
