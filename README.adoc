@@ -1,0 +1,110 @@
+== @himanoa/npm-workspace-based-gha-workflow-optimizer
+
+`@himanoa/npm-workspace-based-gha-workflow-optimizer` is a tool designed to optimize the execution of GitHub Actions workflows based on the npm workspace configuration. It analyzes the workspace definitions in `package.json` and automatically generates `paths` filters for workflow definitions using package names as prefixes. This ensures that workflows are only triggered by relevant changes.
+
+=== Features
+
+* *Workflow Optimization*: Executes workflows based on changes to related packages, as defined in the `package.json` workspace configuration.
+* *Automated `paths` Filter Generation*: Automatically generates `paths` filters for workflow definitions using package names as prefixes, preventing unnecessary workflow executions.
+* *Automated dependenciy analysis*:  Analyzes the dependencies between packages and builds a `paths` filter based on the analysis results.
+
+=== Prerequisites
+
+* Node.js
+* npm
+* A GitHub repository with GitHub Actions set up
+
+=== Installation
+
+Install the package using npm:
+
+[source,sh]
+----
+npm install @himanoa/npm-workspace-based-gha-workflow-optimizer --save-dev
+----
+
+=== Usage
+
+Running this tool analyzes the workspace definitions in `package.json` and automatically updates the `paths` filters in GitHub Actions workflow files based on changes to related workspaces. This ensures that workflows are triggered only by changes to specific packages.
+
+==== Before Use
+
+Example of a GitHub Actions workflow file before using the tool. This workflow is triggered by any push or pull request event:
+
+Filename is a-format.yaml
+[source,yaml]
+----
+name: format
+on: [push, pull_request]
+
+jobs:
+  format:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - uses: actions/setup-node@v4
+      with:
+        node-version: '18.x'
+        registry-url: 'https://registry.npmjs.org'
+    - uses: pnpm/action-setup@v2
+      with:
+        version: 8
+    - run: pnpm install
+    - run: pnpm format
+----
+
+==== After Use
+
+After running the tool, the workflow file is automatically updated to trigger the workflow only for changes related to workspace `a`, as defined in `package.json`:
+
+[source,yaml]
+----
+name: format
+on: 
+  push:
+    paths:
+      - 'workspaces/a/**'
+
+jobs:
+  format:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - uses: actions/setup-node@v4
+      with:
+        node-version: '18.x'
+        registry-url: 'https://registry.npmjs.org'
+    - uses: pnpm/action-setup@v2
+      with:
+        version: 8
+    - run: pnpm install
+    - run: pnpm format
+----
+
+This change helps avoid unnecessary workflow executions, saving resources and optimizing the CI/CD process.
+
+==== How to Run
+
+To run the tool, use the following command:
+
+[source,sh]
+----
+npx @himanoa/npm-workspace-based-gha-workflow-optimizer optimize
+----
+
+The tool will automatically analyze the relevant workflow files and update the `paths` filters as necessary.
+
+=== Contributing
+
+Contributions are welcome! Whether it's bug reports, feature requests, or pull requests, your contributions help improve the project.
+
+. Fork the repository.
+. Create a new branch for your changes (`git checkout -b my-new-feature`).
+. Commit your changes (`git commit -am 'Add some feature'`).
+. Push to the branch (`git push origin my-new-feature`).
+. Create a new Pull Request.
+
+=== License
+
+This project is published under the [MIT License](LICENSE).
+
