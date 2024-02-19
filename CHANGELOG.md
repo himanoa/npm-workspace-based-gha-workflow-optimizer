@@ -1,5 +1,11 @@
 # @himanoa/npm-workspace-based-gha-workflow-optimizer
 
+## 0.0.6
+
+### Patch Changes
+
+- 6906fd3: Re-define bin section in package.json
+
 ## 0.0.5
 
 ### Patch Changes
