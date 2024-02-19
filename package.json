@@ -1,14 +1,13 @@
 {
   "name": "@himanoa/npm-workspace-based-gha-workflow-optimizer",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Create npm workspace based workflow paths filter and Apply created paths filter to github actions workflow",
   "type": "commonjs",
-  "bin": "./dist/cli.js",
-  "repository": "himanoa/npm-workspace-based-gha-workflow-optimizer",
-  "private": false,
   "bin": {
     "workspace-optimizer": "dist/cli.js"
   },
+  "repository": "himanoa/npm-workspace-based-gha-workflow-optimizer",
+  "private": false,
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org/"
