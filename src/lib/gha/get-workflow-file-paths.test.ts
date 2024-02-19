@@ -3,11 +3,10 @@ import { normalizePackageName } from "./get-workflow-file-paths";
 
 describe("normalizePackageName", () => {
   it("replaced @ to ''", () => {
-    expect(normalizePackageName("@foo")).toStrictEqual('foo')
-  })
+    expect(normalizePackageName("@foo")).toStrictEqual("foo");
+  });
 
   it("replaced / to '-'", () => {
-    expect(normalizePackageName("@foo/bar")).toStrictEqual('foo-bar')
-  })
-})
-
+    expect(normalizePackageName("@foo/bar")).toStrictEqual("foo-bar");
+  });
+});

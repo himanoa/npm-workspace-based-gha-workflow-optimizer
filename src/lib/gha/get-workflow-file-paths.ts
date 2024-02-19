@@ -5,5 +5,5 @@ export const getWorkflowFilePaths = async (packageName: string) => {
 };
 
 export const normalizePackageName = (packageName: string): string => {
-  return packageName.replace("@", "").replace('/', '-')
-}
+  return packageName.replace("@", "").replace("/", "-");
+};
