@@ -1,5 +1,11 @@
 # @himanoa/npm-workspace-based-gha-workflow-optimizer
 
+## 0.0.7
+
+### Patch Changes
+
+- Fix a broken bin section in package.json
+
 ## 0.0.6
 
 ### Patch Changes
