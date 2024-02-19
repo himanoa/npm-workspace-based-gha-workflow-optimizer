@@ -1,5 +1,11 @@
 # @himanoa/npm-workspace-based-gha-workflow-optimizer
 
+## 0.0.5
+
+### Patch Changes
+
+- Remove bin
+
 ## 0.0.4
 
 ### Patch Changes
