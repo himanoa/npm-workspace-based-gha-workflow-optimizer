@@ -6,6 +6,9 @@
   "bin": "./dist/cli.js",
   "repository": "himanoa/npm-workspace-based-gha-workflow-optimizer",
   "private": false,
+  "bin": {
+    "workspace-optimizer": "dist/cli.js"
+  },
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org/"
