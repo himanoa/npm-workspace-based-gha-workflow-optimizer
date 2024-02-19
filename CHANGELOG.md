@@ -1,5 +1,11 @@
 # @himanoa/npm-workspace-based-gha-workflow-optimizer
 
+## 0.0.3
+
+### Patch Changes
+
+- 5e880fc: Fix cli.js is not executable
+
 ## 0.0.2
 
 ### Patch Changes
