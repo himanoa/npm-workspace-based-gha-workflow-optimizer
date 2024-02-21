@@ -1,5 +1,11 @@
 # @himanoa/npm-workspace-based-gha-workflow-optimizer
 
+## 0.1.0
+
+### Minor Changes
+
+- 3b680ba: Fix a bug where appended push handler when input is not include push
+
 ## 0.0.7
 
 ### Patch Changes
