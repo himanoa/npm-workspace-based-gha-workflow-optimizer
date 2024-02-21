@@ -3,6 +3,7 @@ import { RootPackage } from "../dependencies/root-package";
 import { makePathsFilter } from "./make-paths-filter";
 import { Graph, Id } from "../graph/digraph";
 import { parse, stringify } from "yaml";
+import { patchPathsFilter } from "./patch-paths-filter";
 
 type Dependencies = {
   readFile: (path: string) => Promise<string>;
@@ -40,32 +41,7 @@ export const makeApplyPathsFilter =
 
         const appliedPathsFilterWorkflows = workflows.map(
           ([path, workflow]) => {
-            return [
-              path,
-              {
-                ...workflow,
-                on: {
-                  ...(Array.isArray(workflow.on)
-                    ? {
-                        ...workflow.on.reduce(
-                          (acc: object, k: object) =>
-                            typeof k === "string"
-                              ? { ...acc, [k]: {} }
-                              : { ...acc, ...k },
-                          {} as object,
-                        ),
-                      }
-                    : {}),
-                  push: {
-                    paths: pathsFilter,
-                  },
-                  pull_request: {
-                    ...workflow.on["pull_request"],
-                    paths: pathsFilter,
-                  },
-                },
-              },
-            ] as const;
+            return [path, patchPathsFilter(workflow, pathsFilter)] as const;
           },
         );
 

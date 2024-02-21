@@ -339,12 +339,6 @@ jobs:
           "./github/a-test.yml",
           "name: test
       on:
-        push:
-          paths:
-            - a/**
-            - b/**
-            - c/**
-            - d/**
         pull_request:
           types:
             - opend
@@ -376,12 +370,6 @@ jobs:
           "./github/a-lint.yml",
           "name: test
       on:
-        push:
-          paths:
-            - a/**
-            - b/**
-            - c/**
-            - d/**
         pull_request:
           types:
             - opend
@@ -413,11 +401,6 @@ jobs:
           "./github/b-test.yml",
           "name: test
       on:
-        push:
-          paths:
-            - b/**
-            - c/**
-            - d/**
         pull_request:
           types:
             - opend
@@ -448,11 +431,6 @@ jobs:
           "./github/b-lint.yml",
           "name: test
       on:
-        push:
-          paths:
-            - b/**
-            - c/**
-            - d/**
         pull_request:
           types:
             - opend
@@ -483,10 +461,6 @@ jobs:
           "./github/c-test.yml",
           "name: test
       on:
-        push:
-          paths:
-            - c/**
-            - d/**
         pull_request:
           types:
             - opend
@@ -516,10 +490,6 @@ jobs:
           "./github/c-lint.yml",
           "name: test
       on:
-        push:
-          paths:
-            - c/**
-            - d/**
         pull_request:
           types:
             - opend
@@ -549,9 +519,6 @@ jobs:
           "./github/d-test.yml",
           "name: test
       on:
-        push:
-          paths:
-            - d/**
         pull_request:
           types:
             - opend
@@ -580,9 +547,6 @@ jobs:
           "./github/d-lint.yml",
           "name: test
       on:
-        push:
-          paths:
-            - d/**
         pull_request:
           types:
             - opend
