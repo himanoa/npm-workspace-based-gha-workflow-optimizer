@@ -14,12 +14,18 @@ dependencies:
   citty:
     specifier: 0.1.5
     version: 0.1.5
+  fp-ts:
+    specifier: 2.16.2
+    version: 2.16.2
   glob:
     specifier: 10.3.10
     version: 10.3.10
   mermaid:
     specifier: 10.8.0
     version: 10.8.0
+  monocle-ts:
+    specifier: 2.3.13
+    version: 2.3.13(fp-ts@2.16.2)
   object.groupby:
     specifier: ^1.0.1
     version: 1.0.1
@@ -2574,6 +2580,10 @@ packages:
       mime-types: 2.1.35
     dev: true
 
+  /fp-ts@2.16.2:
+    resolution: {integrity: sha512-CkqAjnIKFqvo3sCyoBTqgJvF+bHrSik584S9nhTjtBESLx26cbtVMR/T9a6ApChOcSDAaM3JydDmWDUn4EEXng==}
+    dev: false
+
   /fs-extra@7.0.1:
     resolution: {integrity: sha512-YJDaCJZEnBmcbw13fvdAM9AwNOJwOzrE4pqMqBq5nFiEqXUqHwlK4B+3pUw6JNvfSPtX05xFHtYy/1ni01eGCw==}
     engines: {node: '>=6 <7 || >=8'}
@@ -3619,6 +3629,14 @@ packages:
     resolution: {integrity: sha512-2dF2R6YMSZbpip1V1WHKGLNjr/k48uQClqMVb5H3MOvwc9qhYis3/IWbj02qIg/Y8MDXKFF4c5v0rxx2o6xTZw==}
     engines: {node: '>=12.0.0'}
     dev: true
+
+  /monocle-ts@2.3.13(fp-ts@2.16.2):
+    resolution: {integrity: sha512-D5Ygd3oulEoAm3KuGO0eeJIrhFf1jlQIoEVV2DYsZUMz42j4tGxgct97Aq68+F8w4w4geEnwFa8HayTS/7lpKQ==}
+    peerDependencies:
+      fp-ts: ^2.5.0
+    dependencies:
+      fp-ts: 2.16.2
+    dev: false
 
   /mri@1.2.0:
     resolution: {integrity: sha512-tzzskb3bG8LvYGFF/mDTpq3jpI6Q9wc3LEmBaghu+DdCssd1FakN7Bc0hVNmEyGq1bq3RgfkCb3cmQLpNPOroA==}
